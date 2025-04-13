@@ -550,13 +550,7 @@ export default function SimpleWorkGrid({ category }: SimpleWorkGridProps) {
                                 </span>
                             </div>
                         </div>
-                        <div className="p-4">
-                            <div className="flex justify-between items-start mb-2">
-                                <h3 className="text-white text-lg font-medium">{item.title}</h3>
-                                <Badge className={categoryColors[item.category]}>{item.category}</Badge>
-                            </div>
-                            {/* {item.description && <p className="text-white/60 text-sm">{item.description}</p>} */}
-                        </div>
+
                     </div>
 
 
