@@ -59,9 +59,6 @@ export default function Home() {
           <div className="w-full md:w-[500px] flex-shrink-0 flex flex-col justify-between h-full">
             {/* <AboutSection headerSize={headerSize} textSize={textSize} /> */}
             <AboutSection headerSize={headerSize} textSize={textSize} language={language} setLanguage={setLanguage} />
-            tsx
-            Copy
-            Edit
 
           </div>
           <div className="w-full md:flex-grow h-[60vh] md:h-[80vh]">
