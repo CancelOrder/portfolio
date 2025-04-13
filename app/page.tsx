@@ -14,10 +14,9 @@ import { WorkTabs } from "@/components/WorkTabs"
 import { useInView } from "react-intersection-observer"
 import { Button } from "@/components/ui/button"
 import { LayoutGrid, Grid2X2 } from "lucide-react"
-import { Stack } from "@mui/material";
 
 export default function Home() {
-  const headerSize = 1.2; // Không cần useState
+  const headerSize = 1.2;
   const textSize = 0.8;
 
   const [activeSection, setActiveSection] = useState("about")
@@ -30,10 +29,8 @@ export default function Home() {
   const { ref: experienceRef, inView: experienceInView } = useInView({ threshold: 0.3 })
   const { ref: contactRef, inView: contactInView } = useInView({ threshold: 0.3 })
 
-  // Work categories - added Art, Design, and 3D
   const workCategories = ["All", "Banner", "Poster", "Branded Merchandise", "Shirt", "Art", "SocialPost", "Catalog"]
 
-  // Update active section based on scroll position
   useEffect(() => {
     if (contactInView) setActiveSection("contact")
     else if (experienceInView) setActiveSection("experience")
@@ -42,9 +39,14 @@ export default function Home() {
     else if (aboutInView) setActiveSection("about")
   }, [contactInView, experienceInView, skillsInView, workInView, aboutInView])
 
-  // Toggle between display modes
   const toggleWorkDisplayMode = () => {
     setWorkDisplayMode(workDisplayMode === "dynamic" ? "simple" : "dynamic")
+  }
+
+  const [language, setLanguage] = useState<string>("vi")  // Ngôn ngữ mặc định là tiếng Anh
+
+  const handleLanguageChange = (newLanguage: string) => {
+    setLanguage(newLanguage)
   }
 
   return (
@@ -54,22 +56,23 @@ export default function Home() {
       {/* Hero Section */}
       <section id="about" ref={aboutRef} className="min-h-screen flex items-center justify-center p-8 pt-24">
         <div className="w-full h-full flex flex-col md:flex-row items-start gap-12 md:gap-16 max-w-7xl mx-auto">
-          {/* Left Content - Personal Introduction */}
           <div className="w-full md:w-[500px] flex-shrink-0 flex flex-col justify-between h-full">
-            <AboutSection headerSize={headerSize} textSize={textSize} />
-          </div>
+            {/* <AboutSection headerSize={headerSize} textSize={textSize} /> */}
+            <AboutSection headerSize={headerSize} textSize={textSize} language={language} setLanguage={setLanguage} />
+            tsx
+            Copy
+            Edit
 
-          {/* Right Content - Dynamic Frame Layout */}
+          </div>
           <div className="w-full md:flex-grow h-[60vh] md:h-[80vh]">
             <DynamicFrameLayout />
           </div>
         </div>
       </section>
 
-
+      {/* Work Section */}
       <section id="work" ref={workRef} className="py-24 px-8">
-        <div className="max-w-7xl mx-auto flex-grow">
-          {/* Decorative elements */}
+        <div className="max-w-7xl mx-auto flex-grow relative">
           <div className="absolute right-0 top-[30%] w-64 h-64 bg-gradient-to-br from-pink-500/10 to-purple-500/10 rounded-full blur-3xl -z-10"></div>
           <div className="absolute left-0 bottom-[20%] w-80 h-80 bg-gradient-to-tr from-blue-500/10 to-cyan-500/10 rounded-full blur-3xl -z-10"></div>
 
@@ -86,7 +89,6 @@ export default function Home() {
                 className="inline-block ml-3"
               />
             </h2>
-
 
             <Button
               onClick={toggleWorkDisplayMode}
@@ -105,7 +107,6 @@ export default function Home() {
             </Button>
           </div>
 
-          {/* Work Category Tabs */}
           <WorkTabs
             categories={workCategories}
             activeCategory={activeWorkCategory}
@@ -113,16 +114,13 @@ export default function Home() {
           />
 
           <div className="relative mb-16">
-            {/* Decorative elements */}
             <div className="absolute -z-10 w-full h-full">
               <div className="absolute top-10 right-10 w-32 h-32 rounded-full bg-gradient-to-r from-pink-500/5 to-purple-500/5 blur-xl"></div>
               <div className="absolute bottom-20 left-20 w-40 h-40 rounded-full bg-gradient-to-r from-blue-500/5 to-cyan-500/5 blur-xl"></div>
             </div>
 
-            {/* Toggle between display modes */}
             {workDisplayMode === "dynamic" ? (
               <div className="h-[70vh]">
-
                 <DynamicFrameLayout category={activeWorkCategory === "All" ? undefined : activeWorkCategory} />
               </div>
             ) : (
@@ -132,6 +130,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Skills Section */}
       <section id="skills" ref={skillsRef} className="py-24 px-8">
         <div className="max-w-7xl mx-auto">
           <h2 className={`${ppEditorialNewUltralightItalic.className} text-5xl md:text-7xl font-light italic text-white/80 tracking-tighter mb-16`}>
@@ -150,83 +149,56 @@ export default function Home() {
         </div>
       </section>
 
-
-
       {/* Experience Section */}
       <section id="experience" ref={experienceRef} className="py-24 px-8">
         <div className="max-w-7xl mx-auto">
-          <h2
-            className={`${ppEditorialNewUltralightItalic.className} text-5xl md:text-7xl font-light italic text-white/80 tracking-tighter mb-16`}
-          >
-
+          <h2 className={`${ppEditorialNewUltralightItalic.className} text-5xl md:text-7xl font-light italic text-white/80 tracking-tighter mb-16`}>
             <span className="inline-flex items-center">
               <img
                 src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People/Person%20Running.png"
-                alt="Artist Light Skin Tone"
+                alt="Person Running"
                 width="75"
                 height="75"
                 className="mr-2"
               />
               Experience
             </span>
-
           </h2>
-          <ExperienceSection />
+          {/* <ExperienceSection /> */}
+          <ExperienceSection language={language} onLanguageChange={handleLanguageChange} />
+
         </div>
       </section>
 
       {/* Contact Section */}
       <section id="contact" ref={contactRef} className="py-24 px-8">
         <div className="max-w-7xl mx-auto">
-          <h2
-            className={`${ppEditorialNewUltralightItalic.className} text-5xl md:text-7xl font-light italic text-white/80 tracking-tighter mb-16`}
-          >
-
+          <h2 className={`${ppEditorialNewUltralightItalic.className} text-5xl md:text-7xl font-light italic text-white/80 tracking-tighter mb-16`}>
             <span className="inline-flex items-center">
               <img
                 src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Hand%20gestures/Eyes.png"
-                alt="Artist Light Skin Tone"
+                alt="Eyes"
                 width="75"
                 height="75"
                 className="mr-2"
               />
               Contact
             </span>
-
-
           </h2>
-          <ContactSection />
+          <ContactSection language={language} onLanguageChange={handleLanguageChange} />
         </div>
       </section>
 
-
+      {/* Footer */}
       <footer className="py-8 px-8 border-t border-white/10">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
           <p className="text-white/50 text-sm">© {new Date().getFullYear()} NVCN. All rights reserved.</p>
           <div className="flex gap-6 mt-4 md:mt-0">
-            <Link
-              href="https://github.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white/50 hover:text-white/80 transition-colors"
-            >
+            <Link href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white/80 transition-colors">
               GitHub
             </Link>
-            <Link
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white/50 hover:text-white/80 transition-colors"
-            >
+            <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white/80 transition-colors">
               LinkedIn
-            </Link>
-            <Link
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white/50 hover:text-white/80 transition-colors"
-            >
-              Twitter
             </Link>
           </div>
         </div>
