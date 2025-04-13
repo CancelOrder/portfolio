@@ -142,9 +142,15 @@ export default function Home() {
               Skills
             </span>
           </h2>
-          <SkillsSection />
+
+          <SkillsSection
+            language={language}
+            onLanguageChange={handleLanguageChange}
+          />
+
         </div>
       </section>
+
 
       {/* Experience Section */}
       <section id="experience" ref={experienceRef} className="py-24 px-8">
