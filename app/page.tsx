@@ -87,7 +87,7 @@ export default function Home() {
               />
             </h2>
 
-            <Button
+            {/* <Button
               onClick={toggleWorkDisplayMode}
               variant="outline"
               className="bg-white/5 border-white/10 text-white hover:bg-white/10"
@@ -101,7 +101,7 @@ export default function Home() {
                   <LayoutGrid className="mr-2 h-4 w-4" /> Dynamic View
                 </>
               )}
-            </Button>
+            </Button> */}
           </div>
 
           <WorkTabs

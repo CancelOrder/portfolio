@@ -473,6 +473,23 @@ const sampleWorkItems: WorkItem[] = [
         imageUrl: "./Catalog.pdf",
         description: "Mobile app interface design concept",
     },
+    {
+        id: 63,
+        title: "UI Design 1",
+        category: "Poster",
+        imageUrl: "./8/1.jpg",
+        description: "Mobile app interface design concept",
+    },
+
+
+
+    {
+        id: 64,
+        title: "UI Design 1",
+        category: "Poster",
+        imageUrl: "./8/2.jpg",
+        description: "Mobile app interface design concept",
+    },
 
 ]
 
